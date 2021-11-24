@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onkeydown="changeDirection(event)">
+    <canvas id="c" width="800" height="600" style="border: 1px solid #ccc"></canvas>
+
+    <script>
+        var canvas = document.getElementById('c');
+        var ctx = canvas.getContext('2d');
+        var snake = {x: 400, y: 300};
+        var kierunek = "gora"
+        setInterval("gameLoop()", 500);
+
+        function changeDirection(e) {
+            console.log(e);
+            switch(e.kay) {
+                case "w": kierunek = "gora";
+                break;
+                case "a": kierunek = "lewo";
+                break;
+                case "s": kierunek = "dol";
+                break;
+                case "d": kierunek = "prawo";
+                break;               
+            }
+        }
+        function gameLoop() {
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0,0,800,600);
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(snake.x, snake.y, 10, 10);
+            
+            switch(kierunek) {
+                case "dol": snake.y += 10;
+                break;
+                case "gora": snake.y -= 10;
+                break;
+                case "lewo": snake.x -= 10;
+                break;
+                case "prawo": snake.x += 10;
+                break;
+
+            }
+            if(snake.y < 0 || snake.y > 600 || snake.x < 0 || snake.x > 800) {
+                alert("przegrałeś!");
+                
+            }                           
+        }
+
+    </script>
+</body>
+</html>
